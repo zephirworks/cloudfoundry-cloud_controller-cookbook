@@ -1,0 +1,16 @@
+# <%= @component_name %> Service
+
+description     "<%= @component_name %> Server"
+author          "Trotter Cashion <cashion@gmail.com>"
+
+start on (net-device-up
+          and filesystem
+      and runlevel [2345])
+stop on runlevel [016]
+
+respawn
+
+env PATH="<%= @path %>:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH
+
+exec start-stop-daemon --start --chuid <%= @user %> --pid <%= @pid_file %> --startas <%= @path %>/ruby -- <%= @bin_file %> -c <%= @config_file %>
