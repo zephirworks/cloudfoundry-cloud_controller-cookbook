@@ -1,5 +1,15 @@
 include_attribute "cloudfoundry-common"
 
+# Where to install the CloudFoundry code.
+default['cloudfoundry_cloud_controller']['vcap']['install_path'] = "/srv/vcap-cloud_controller"
+
+# Repository to use when fetching the CloudFoundry code.
+default['cloudfoundry_cloud_controller']['vcap']['repo']         = "https://github.com/cloudfoundry/cloud_controller.git"
+
+# Git reference to use when fetching the CloudFoundry code. Can be
+# either a specific sha or a reference such as `HEAD` or `master`.
+default['cloudfoundry_cloud_controller']['vcap']['reference']    = "2e7d91bb9130e18c86359e33e02fb5feddceed8b"
+
 # The domain name for your CloudFoundry instance.
 default['cloudfoundry_cloud_controller']['server']['domain'] = 'vcap.me'
 
