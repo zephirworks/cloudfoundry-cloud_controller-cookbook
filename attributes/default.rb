@@ -61,7 +61,7 @@ default['cloudfoundry_cloud_controller']['server']['max_staging_runtime'] = 120
 default['cloudfoundry_cloud_controller']['server']['staging_secure'] = false
 
 # An array containing the email addresses of all server admins.
-default['cloudfoundry_cloud_controller']['server']['admins'] = ['you@example.com']
+default['cloudfoundry_cloud_controller']['server']['admins'] = []
 
 # The name of the database that CloudController will use.
 default['cloudfoundry_cloud_controller']['database']['name'] = 'cloud_controller'
