@@ -33,8 +33,9 @@ external_port: <%= node[:cloudfoundry_cloud_controller][:server][:external_port]
 # nginx proxy provide multiple functions including offloading of file uploads/downloads.
 nginx:
   use_nginx: <%= node[:cloudfoundry_cloud_controller][:server][:use_nginx] %> #nginx proxy in front of CC?
-  # instance_socket: /tmp/cloud_controller.sock
-  insecure_instance_port: <%= node[:cloudfoundry_cloud_controller][:server][:insecure_instance_port] %> #debug only!!!! -- not for production use.
+  <% if node[:cloudfoundry_cloud_controller][:server][:use_nginx] -%>
+  instance_socket: <%= node[:cloudfoundry_cloud_controller][:server][:instance_socket] %>
+  <%- end %>
 
 # if log_file is set, it must be a fully-qualified path,
 # because the bin/vcap script reads it directly from the file.

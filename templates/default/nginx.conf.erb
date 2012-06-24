@@ -1,0 +1,15 @@
+server {
+  listen       0.0.0.0:80;
+  server_name  api.<%= node[:cloudfoundry_cloud_controller][:server][:domain] %> 192.168.122.2;
+  server_name_in_redirect off;
+
+location /droplets/ {
+  internal;
+  alias   <%= node[:cloudfoundry_common][:droplets_dir] %>/;
+}
+
+  location / {
+    access_log   /var/log/nginx/nginx_api_access.log main;
+    proxy_pass http://unix:<%= node[:cloudfoundry_cloud_controller][:server][:instance_socket] %>;
+  }
+}

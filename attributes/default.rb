@@ -36,6 +36,8 @@ default['cloudfoundry_cloud_controller']['server']['external_port'] = 9022
 # TODO (trotter): Find out what this means.
 default['cloudfoundry_cloud_controller']['server']['use_nginx'] = false
 
+default['cloudfoundry_cloud_controller']['server']['instance_socket'] = '/tmp/cloud_controller.sock'
+
 # TODO (trotter): Find out what this means.
 default['cloudfoundry_cloud_controller']['server']['insecure_instance_port'] = 9025
 
