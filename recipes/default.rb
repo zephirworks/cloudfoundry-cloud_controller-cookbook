@@ -17,6 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "cloudfoundry-cloud_controller::vcap"
 include_recipe "cloudfoundry-cloud_controller::database"
 include_recipe "cloudfoundry-cloud_controller::server"

@@ -18,19 +18,28 @@ package "libxslt1-dev"
 package "sqlite3"
 package "libsqlite3-dev"
 
-cloudfoundry_component "cloud_controller" do
+cloudfoundry_common_source "cloud_controller" do
+  path          node['cloudfoundry_cloud_controller']['vcap']['install_path']
+  repository    node['cloudfoundry_cloud_controller']['vcap']['repo']
+  reference     node['cloudfoundry_cloud_controller']['vcap']['reference']
+  subdirectory  "cloud_controller"
+end
+
+cloudfoundry_common_component "cloud_controller" do
   install_path install_path
   bin_file File.join(install_path, "bin", "cloud_controller")
   pid_file node.cloudfoundry_cloud_controller.server.pid_file
   log_file node.cloudfoundry_cloud_controller.server.log_file
-  upstart_file_cookbook "cloudfoundry-cloud_controller"
+  upstart_file  "upstart-chuid.conf.erb"
+  action        [:create, :enable]
+  subscribes    :restart, resources("cloudfoundry-common_source" => "cloud_controller")
 end
 
 bash "run cloudfoundry migrations" do
   user node[:cloudfoundry_common][:user]
   cwd  install_path
   code "PATH='#{ruby_path}:$PATH' #{File.join(ruby_path, "bundle")} exec rake db:migrate RAILS_ENV=production CLOUD_CONTROLLER_CONFIG='#{config_file}'"
-  subscribes :run, resources(:git => node[:cloudfoundry_cloud_controller][:vcap][:install_path])
+  subscribes :run, resources("cloudfoundry-common_source" => "cloud_controller")
   action :nothing
 end
 
