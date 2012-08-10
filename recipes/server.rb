@@ -30,7 +30,7 @@ bash "run cloudfoundry migrations" do
   user node[:cloudfoundry_common][:user]
   cwd  install_path
   code "PATH='#{ruby_path}:$PATH' #{File.join(ruby_path, "bundle")} exec rake db:migrate RAILS_ENV=production CLOUD_CONTROLLER_CONFIG='#{config_file}'"
-  subscribes :run, resources(:git => node[:cloudfoundry_common][:vcap][:install_path])
+  subscribes :run, resources(:git => node[:cloudfoundry_cloud_controller][:vcap][:install_path])
   action :nothing
 end
 
