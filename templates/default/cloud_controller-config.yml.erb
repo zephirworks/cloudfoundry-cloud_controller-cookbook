@@ -32,9 +32,9 @@ external_port: <%= node[:cloudfoundry_cloud_controller][:server][:external_port]
 
 # nginx proxy provide multiple functions including offloading of file uploads/downloads.
 nginx:
-  use_nginx: <%= node[:cloudfoundry_cloud_controller][:server][:use_nginx] %> #nginx proxy in front of CC?
-  <% if node[:cloudfoundry_cloud_controller][:server][:use_nginx] -%>
-  instance_socket: <%= node[:cloudfoundry_cloud_controller][:server][:instance_socket] %>
+  use_nginx: <%= node['cloudfoundry_cloud_controller']['nginx']['enable'] %>
+  <% if node['cloudfoundry_cloud_controller']['nginx']['enable'] -%>
+  instance_socket: <%= node['cloudfoundry_cloud_controller']['nginx']['instance_socket'] %>
   <%- end %>
 
 # if log_file is set, it must be a fully-qualified path,
@@ -52,8 +52,8 @@ directories:
   droplets: <%= node[:cloudfoundry_common][:droplets_dir] %>
   resources: <%= node[:cloudfoundry_common][:resources_dir] %>
   staging_manifests: <%= node[:cloudfoundry_common][:staging_manifests_dir] %>
-  staging_cache: <%= node[:cloudfoundry_common][:staging_cache_dir] %>
-  tmpdir: <%= node[:cloudfoundry_common][:tmpdir] %>
+  staging_cache: <%= node['cloudfoundry_cloud_controller'][:staging_cache_dir] %>
+  tmpdir: <%= node['cloudfoundry_cloud_controller'][:tmpdir] %>
 
 # NATS message bus URI
 mbus: nats://<%= node[:nats_server][:user] %>:<%= node[:nats_server][:password] %>@<%= node[:cloudfoundry_common][:nats_server][:host] %>:<%= node[:cloudfoundry_common][:nats_server][:port] %>/

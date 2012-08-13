@@ -18,6 +18,14 @@ package "libxslt1-dev"
 package "sqlite3"
 package "libsqlite3-dev"
 
+%w[staging_cache_dir tmpdir platform_cache_dir].each do |d|
+  directory node['cloudfoundry_cloud_controller'][d] do
+    recursive true
+    owner node['cloudfoundry_common']['user']
+    mode  '0755'
+  end
+end
+
 cloudfoundry_common_source "cloud_controller" do
   path          node['cloudfoundry_cloud_controller']['vcap']['install_path']
   repository    node['cloudfoundry_cloud_controller']['vcap']['repo']
@@ -51,30 +59,5 @@ if !node['cloudfoundry_cloud_controller']['server']['frameworks'] ||
 else
   node['cloudfoundry_cloud_controller']['server']['frameworks'].each do |_, framework|
     include_recipe framework[:cookbook]
-  end
-end
-
-if node['cloudfoundry_cloud_controller']['server']['use_nginx']
-  template File.join(node['nginx']['dir'], "sites-available", "cloud_controller") do
-    source "nginx.conf.erb"
-    owner  "root"
-    group  "root"
-    mode   "0644"
-    notifies :restart, "service[nginx]"
-  end
-
-  nginx_site "cloud_controller" do
-    nxpath File.join(node['nginx']['path'], "sbin")
-  end
-
-  # nginx recipe adds a default site. It gets in our way, so we remove it.
-  nginx_site "default" do
-    nxpath File.join(node['nginx']['path'], "sbin")
-    enable false
-  end
-else
-  nginx_site "cloud_controller" do
-    nxpath File.join(node['nginx']['path'], "sbin")
-    enable false
   end
 end

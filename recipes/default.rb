@@ -19,3 +19,6 @@
 
 include_recipe "cloudfoundry-cloud_controller::database"
 include_recipe "cloudfoundry-cloud_controller::server"
+if node['cloudfoundry_cloud_controller']['nginx']['enable']
+  include_recipe "cloudfoundry-cloud_controller::nginx"
+end
