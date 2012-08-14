@@ -109,6 +109,11 @@ builtin_services:
     token: <%= node[:cloudfoundry_common][:service_token] %>
 <% end %>
 
+<% if node[:cloudfoundry_cloud_controller][:server][:service_broker] -%>
+service_broker:
+  token: [ <%= node[:cloudfoundry_common][:service_token] %> ]
+<%- end %>
+
 # Enable/disable starting apps in debug modes.
 allow_debug: <%= node[:cloudfoundry_cloud_controller][:server][:allow_debug] %>
 

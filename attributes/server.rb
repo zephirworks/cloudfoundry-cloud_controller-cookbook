@@ -56,5 +56,8 @@ default['cloudfoundry_cloud_controller']['server']['services'] = [
   'postgresql'
 ]
 
+# Set to true to enable the service_broker service.
+default['cloudfoundry_cloud_controller']['server']['service_broker'] = false
+
 # Where to store the pid_file for the CloudController.
 default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry_common']['pid_dir'], "cloud_controller.pid")
