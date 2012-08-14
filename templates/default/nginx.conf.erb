@@ -3,8 +3,6 @@ log_format cc '$host - [$time_local] '
               '"$http_referer" "$http_user_agent" '
               '$remote_addr response_time:$upstream_response_time';
 
-access_log  <%= node['nginx']['log_dir'] %>/nginx_cc_main.log  cc;
-
 # sendfile             on;  #enable use of sendfile()
 # tcp_nopush           on;
 # tcp_nodelay          on;  #disable nagel's algorithm
@@ -21,6 +19,8 @@ server {
   listen    <%= node['cloudfoundry_cloud_controller']['server']['external_port'] %>;
   server_name  _;
   server_name_in_redirect off;
+
+  access_log  <%= node['nginx']['log_dir'] %>/nginx_cc_main.log  cc;
 
   #proxy and log all CC traffic
   location / {
