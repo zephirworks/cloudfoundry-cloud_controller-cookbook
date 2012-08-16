@@ -81,6 +81,22 @@ staging:
   # Create a secure environment for staging
   secure: <%= node[:cloudfoundry_cloud_controller][:server][:staging_secure] %>
 
+<% if node['cloudfoundry_cloud_controller']['stager']['enable'] -%>
+  new_stager_percent: <%= node['cloudfoundry_cloud_controller']['stager']['percent'] %>
+  <% if node['cloudfoundry_cloud_controller']['stager']['email_regexp'] -%>
+  new_stager_email_regexp: <%= node['cloudfoundry_cloud_controller']['stager']['email_regexp'] %>
+  <%- end %>
+  auth:
+    user: <%= node['cloudfoundry_cloud_controller']['stager']['user'] %>
+    password: <%= node['cloudfoundry_cloud_controller']['stager']['password'] %>
+
+# redis for new stager
+redis:
+  host: <%= cf_vcap_redis_node.attribute?('cloud') ? cf_vcap_redis_node['cloud']['local_ipv4'] : cf_vcap_redis_node['ipaddress'] %>
+  port: <%= cf_vcap_redis_node['cloudfoundry_redis']['vcap']['port'] %>
+  password: <%= cf_vcap_redis_node['cloudfoundry_redis']['vcap']['password'] %>
+<%- end %>
+
 # Disable the use of the uaa (our cookbooks don't support it yet).
 uaa:
   enabled: false
