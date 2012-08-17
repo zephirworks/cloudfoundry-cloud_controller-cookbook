@@ -25,10 +25,10 @@ default['cloudfoundry_cloud_controller']['server']['external_port'] = 9022
 default['cloudfoundry_cloud_controller']['server']['log_level'] = 'info'
 
 # TODO (trotter): Find out how this differes from `rails_log_file`.
-default['cloudfoundry_cloud_controller']['server']['log_file'] = "#{node['cloudfoundry_common']['log_dir']}/cloud_controller.log"
+default['cloudfoundry_cloud_controller']['server']['log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller.log"
 
 # TODO (trotter): Find out how this differs from `log_file`.
-default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{node['cloudfoundry_common']['log_dir']}/cloud_controller-rails.log"
+default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller-rails.log"
 
 # TODO (trotter): Find out what this means.
 default['cloudfoundry_cloud_controller']['server']['allow_debug'] = true
@@ -60,4 +60,4 @@ default['cloudfoundry_cloud_controller']['server']['services'] = [
 default['cloudfoundry_cloud_controller']['server']['service_broker'] = false
 
 # Where to store the pid_file for the CloudController.
-default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry_common']['pid_dir'], "cloud_controller.pid")
+default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")

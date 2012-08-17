@@ -1,4 +1,4 @@
-include_attribute "cloudfoundry-common"
+include_attribute "cloudfoundry"
 
 # Where to install the CloudFoundry code.
 default['cloudfoundry_cloud_controller']['vcap']['install_path'] = "/srv/vcap-cloud_controller"

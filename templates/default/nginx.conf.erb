@@ -40,7 +40,7 @@ server {
   #nginx will serve the file root || location || foo.txt
   location /droplets/ {
     internal;
-    root   <%= node['cloudfoundry_common']['shared_dir'] %>;
+    root   <%= node['cloudfoundry']['shared_dir'] %>;
   }
 
   location ~ (/apps/.*/application|/services/v\d+/configurations/.*/serialized/data) {
