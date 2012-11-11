@@ -8,7 +8,7 @@ default['cloudfoundry_cloud_controller']['vcap']['repo']         = "https://gith
 
 # Git reference to use when fetching the CloudFoundry code. Can be
 # either a specific sha or a reference such as `HEAD` or `master`.
-default['cloudfoundry_cloud_controller']['vcap']['reference']    = "bdfd70bf189b188d1f84f0a1290f41adbe610497"
+default['cloudfoundry_cloud_controller']['vcap']['reference']    = "6299514f1dc7bf3c2b4ad506bcb7d9732761a319"
 
 # TODO (trotter): Find out what this does.
 default['cloudfoundry_cloud_controller']['staging_cache_dir'] = "/var/vcap/data/cloud_controller/staging"
