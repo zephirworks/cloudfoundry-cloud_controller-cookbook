@@ -9,6 +9,6 @@ version          "0.99.0"
   supports os
 end
 
-%w{ postgresql mysql database cloudfoundry }.each do |cb|
+%w{ cloudfoundry database mysql postgresql }.each do |cb|
   depends cb
 end
