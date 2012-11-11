@@ -34,7 +34,6 @@ Attributes
 * `node['cloudfoundry_cloud_controller']['server']['allow_registration']` - Set whether users can self register to your CloudFoundry Instance. Default is `true`.
 * `node['cloudfoundry_cloud_controller']['server']['allow_external_app_uris']` - TODO (trotter): Find out what this does. Default is `false`.
 * `node['cloudfoundry_cloud_controller']['server']['external_port']` - The external port on which the CloudController is accessible. This value normally won't matter, as a CloudFoundry router will front the CloudController and serve it at `api.#{hostname}:80`. Default is `9022`.
-* `node['cloudfoundry_cloud_controller']['server']['use_nginx']` - TODO (trotter): Find out what this means. Default is `false`.
 * `node['cloudfoundry_cloud_controller']['server']['insecure_instance_port']` - TODO (trotter): Find out what this means. Default is `9025`.
 * `node['cloudfoundry_cloud_controller']['server']['log_level']` - Log level for the CloudFoundry application. Default is `info'`.
 * `node['cloudfoundry_cloud_controller']['server']['log_file']` - TODO (trotter): Find out how this differes from `rails_log_file`. Default is `#{node['cloudfoundry']['log_dir']}/cloud_controller.log"`.
@@ -44,12 +43,21 @@ Attributes
 * `node['cloudfoundry_cloud_controller']['server']['max_staging_runtime']` - TODO (trotter): Find out what this means. Default is `120`.
 * `node['cloudfoundry_cloud_controller']['server']['staging_secure']` - TODO (trotter): Find out what this means. Default is `false`.
 * `node['cloudfoundry_cloud_controller']['server']['admins']` - An array containing the email addresses of all server admins. Default is `['you@example.com']`.
-* `node['cloudfoundry_cloud_controller']['database']['name']` - The name of the database that CloudController will use. Default is `cloud_controller'`.
-* `node['cloudfoundry_cloud_controller']['database']['host']` - Hostname where CloudController's database is located. Default is `localhost'`.
 * `node['cloudfoundry_cloud_controller']['server']['runtimes']` - An array of hashes containing the `name` and `version` for each runtime available in your CloudFoundry instance. XXX (trotter): Not sure we can store hashes in an attribute. Will have to test this part thoroughly. Default is `[`.
 * `node['cloudfoundry_cloud_controller']['server']['frameworks']` - An array containing the name of each framework supported by your CloudFoundry instance. Due to a quirk in cloud_controller, you _must_ have rails3 and sinatra listed as frameworks. Default is `[`.
 * `node['cloudfoundry_cloud_controller']['server']['pid_file']` - Where to store the pid_file for the CloudController. Default is `File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")`.
 
+database
+--------
+
+* `node['cloudfoundry_cloud_controller']['database']['name']` - The name of the database that CloudController will use. Defaults to `cloud_controller'`.
+* `node['cloudfoundry_cloud_controller']['database']['host']` - Hostname where CloudController's database is located. Defaults to `localhost'`.
+
+nginx
+-----
+
+* `node['cloudfoundry_cloud_controller']['nginx']['enable']` - Set to true to enable nginx in fron of the cloud_controller. Defaults to false.
+* `node['cloudfoundry_cloud_controller']['nginx']['instance_socket']` - Path to the socket to use for communication between nginx and the CloudController. Defaults to `/tmp/cloud_controller.sock'`.
 
 Usage
 =====
