@@ -39,9 +39,7 @@ Attributes
 * `node['cloudfoundry_cloud_controller']['server']['log_file']` - TODO (trotter): Find out how this differes from `rails_log_file`. Default is `#{node['cloudfoundry']['log_dir']}/cloud_controller.log"`.
 * `node['cloudfoundry_cloud_controller']['server']['rails_log_file']` - TODO (trotter): Find out how this differs from `log_file`. Default is `#{node['cloudfoundry']['log_dir']}/cloud_controller-rails.log"`.
 * `node['cloudfoundry_cloud_controller']['server']['allow_debug']` - TODO (trotter): Find out what this means. Default is `true`.
-* `node['cloudfoundry_cloud_controller']['server']['max_current_stagers']` - TODO (trotter): Find out what this means. Default is `10`.
 * `node['cloudfoundry_cloud_controller']['server']['max_staging_runtime']` - TODO (trotter): Find out what this means. Default is `120`.
-* `node['cloudfoundry_cloud_controller']['server']['staging_secure']` - TODO (trotter): Find out what this means. Default is `false`.
 * `node['cloudfoundry_cloud_controller']['server']['admins']` - An array containing the email addresses of all server admins. Default is `['you@example.com']`.
 * `node['cloudfoundry_cloud_controller']['server']['runtimes']` - An array of hashes containing the `name` and `version` for each runtime available in your CloudFoundry instance. XXX (trotter): Not sure we can store hashes in an attribute. Will have to test this part thoroughly. Default is `[`.
 * `node['cloudfoundry_cloud_controller']['server']['frameworks']` - An array containing the name of each framework supported by your CloudFoundry instance. Due to a quirk in cloud_controller, you _must_ have rails3 and sinatra listed as frameworks. Default is `[`.

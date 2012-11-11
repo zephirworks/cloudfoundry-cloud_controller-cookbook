@@ -34,13 +34,7 @@ default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{node['
 default['cloudfoundry_cloud_controller']['server']['allow_debug'] = true
 
 # TODO (trotter): Find out what this means.
-default['cloudfoundry_cloud_controller']['server']['max_current_stagers'] = 10
-
-# TODO (trotter): Find out what this means.
 default['cloudfoundry_cloud_controller']['server']['max_staging_runtime'] = 120
-
-# TODO (trotter): Find out what this means.
-default['cloudfoundry_cloud_controller']['server']['staging_secure'] = false
 
 # An array containing the email addresses of all server admins.
 default['cloudfoundry_cloud_controller']['server']['admins'] = []
