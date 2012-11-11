@@ -1,9 +1,9 @@
 include_attribute "cloudfoundry"
 
-# Where to install the CloudFoundry code.
-default['cloudfoundry_cloud_controller']['vcap']['install_path'] = "/srv/vcap-cloud_controller"
+# Path to a directory that will hold the cloud_controller code.
+default['cloudfoundry_cloud_controller']['vcap']['install_path'] = "/srv/cloud_controller"
 
-# Repository to use when fetching the CloudFoundry code.
+# Source repository for the cloud\_controller code.
 default['cloudfoundry_cloud_controller']['vcap']['repo']         = "https://github.com/cloudfoundry/cloud_controller.git"
 
 # Git reference to use when fetching the CloudFoundry code. Can be
