@@ -22,6 +22,7 @@ Cookbooks
 * cloudfoundry
 * database
 * mysql
+* nginx
 * postgresql
 
 Attributes
