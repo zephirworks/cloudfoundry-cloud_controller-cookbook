@@ -1,4 +1,5 @@
 cookbook "cloudfoundry-cloud_controller" do
   configuration "database"
+  configuration "server"
   runtimes []
 end

@@ -3,3 +3,9 @@ site 'http://community.opscode.com/api/v1'
 cookbook "cloudfoundry",
   :git => "https://github.com/andreacampi/cloudfoundry-coobook.git",
   :ref => "master"
+
+cookbook "nats-server",
+  :git => "https://github.com/zephirworks/nats-server-cookbook.git",
+  :ref => "master"
+
+cookbook "redisio"
