@@ -1,0 +1,3 @@
+cookbook "cloudfoundry-cloud_controller" do
+  runtimes []
+end
