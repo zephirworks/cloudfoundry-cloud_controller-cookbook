@@ -1,30 +1,72 @@
-ruby_path    = ruby_bin_path(node['cloudfoundry']['ruby_1_9_2_version'])
-config_file  = File.join(node['cloudfoundry']['config_dir'], "cloud_controller.yml")
-install_path = File.join(node['cloudfoundry_cloud_controller']['vcap']['install_path'], "cloud_controller")
+#
+# Cookbook Name:: cloudfoundry-cloud_controller
+# Recipe:: server
+#
+# Copyright 2012, Trotter Cashion
+# Copyright 2012, ZephirWorks
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-# Needed because the CloudController Gemfile depends on mysql
-include_recipe "mysql::client"
+include_recipe "cloudfoundry::user"
+include_recipe "postgresql::client"
 
-# CloudController must unzip incoming files
-package "unzip"
-package "zip"
+%w[libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev].each do |pkg|
+  package pkg
+end
 
-# For the nokogiri dependency
-package "libxml2"
-package "libxml2-dev"
-package "libxslt1-dev"
+#
+# Install the correct rbenv
+#
+node.default['cloudfoundry_cloud_controller']['ruby_version'] = node['cloudfoundry']['ruby_1_9_2_version']
+ruby_ver = node['cloudfoundry_cloud_controller']['ruby_version']
+ruby_path = ruby_bin_path(ruby_ver)
 
-# For the sqlite3 dependency
-package "sqlite3"
-package "libsqlite3-dev"
+include_recipe "rbenv::default"
+include_recipe "rbenv::ruby_build"
 
-%w[staging_cache_dir tmpdir platform_cache_dir].each do |d|
+rbenv_ruby ruby_ver
+
+#
+# Create all the directories we are going to need
+#
+%w[log_dir].each do |d|
+  directory node['cloudfoundry'][d] do
+    recursive true
+    owner node['cloudfoundry']['user']
+    mode  0755
+  end
+end
+%w[data_dir].each do |d|
   directory node['cloudfoundry_cloud_controller'][d] do
     recursive true
     owner node['cloudfoundry']['user']
     mode  '0755'
   end
 end
+%w[droplets_dir resources_dir staging_manifests_dir tmp_dir].each do |d|
+  directory node['cloudfoundry_cloud_controller']['server'][d] do
+    recursive true
+    owner node['cloudfoundry']['user']
+    mode  '0755'
+  end
+end
+
+#
+# Install and configure
+#
+config_file  = File.join(node['cloudfoundry']['config_dir'], "cloud_controller.yml")
+install_path = File.join(node['cloudfoundry_cloud_controller']['vcap']['install_path'], "cloud_controller")
 
 cloudfoundry_source "cloud_controller" do
   path          node['cloudfoundry_cloud_controller']['vcap']['install_path']
@@ -40,6 +82,11 @@ cloudfoundry_component "cloud_controller" do
   log_file node['cloudfoundry_cloud_controller']['server']['log_file']
   action        [:create, :enable]
   subscribes    :restart, resources(:cloudfoundry_source => "cloud_controller")
+end
+
+template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
+  source "runtimes.yml.erb"
+  owner node['cloudfoundry']['user']
 end
 
 bash "run cloudfoundry migrations" do

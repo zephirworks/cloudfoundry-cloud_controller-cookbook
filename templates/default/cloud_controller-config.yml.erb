@@ -49,10 +49,10 @@ rails_logging:
   file: <%= node['cloudfoundry_cloud_controller']['server']['rails_log_file'] %>
 
 directories:
-  droplets: <%= node['cloudfoundry']['droplets_dir'] %>
-  resources: <%= node['cloudfoundry']['resources_dir'] %>
-  staging_manifests: <%= node['cloudfoundry']['staging_manifests_dir'] %>
-  tmpdir: <%= node['cloudfoundry_cloud_controller'][:tmpdir] %>
+  droplets: <%= node['cloudfoundry_cloud_controller']['server']['droplets_dir'] %>
+  resources: <%= node['cloudfoundry_cloud_controller']['server']['resources_dir'] %>
+  staging_manifests: <%= node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] %>
+  tmpdir: <%= node['cloudfoundry_cloud_controller']['server']['tmp_dir'] %>
 
 # NATS message bus URI
 mbus: <%= cf_mbus_url %>
@@ -123,16 +123,4 @@ service_proxy:
 # Enable/disable starting apps in debug modes.
 allow_debug: <%= node['cloudfoundry_cloud_controller']['server']['allow_debug'] %>
 
-# Supported runtime versions and debug modes.
-# Used for /info/runtimes endpoint (served unfiltered as JSON)
-runtimes:
-<%- node['cloudfoundry_dea']['runtimes'].each do |_, runtime| %>
-  <%= runtime[:name] %>:
-    version: <%= runtime[:version] %>
-<%- if runtime[:debug_env] %>
-    debug_modes:
-<%- runtime[:debug_env].each do |state, _| %>
-      - <%= state %>
-<%- end # debug_env.each %>
-<%- end # if debug_env %>
-<%- end # runtimes.each %>
+runtimes_file: <%= File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") %>
