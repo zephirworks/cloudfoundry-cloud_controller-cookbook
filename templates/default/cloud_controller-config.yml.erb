@@ -83,9 +83,12 @@ staging:
 
 # redis for new stager
 redis:
-  host: <%= cf_vcap_redis_node.attribute?('cloud') ? cf_vcap_redis_node['cloud']['local_ipv4'] : cf_vcap_redis_node['ipaddress'] %>
-  port: <%= cf_vcap_redis_node['cloudfoundry_redis']['vcap']['port'] %>
-  password: <%= cf_vcap_redis_node['cloudfoundry_redis']['vcap']['password'] %>
+  <% redis_node = cf_vcap_redis_node || node %>
+  host: <%= redis_node.attribute?('cloud') ? redis_node['cloud']['local_ipv4'] : redis_node['ipaddress'] %>
+  port: <%= node['cloudfoundry_cloud_controller']['redis']['port'] %>
+  <% if node['cloudfoundry_cloud_controller']['redis']['password'] -%>
+  password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
+  <%- end %>
 
 # Disable the use of the uaa (our cookbooks don't support it yet).
 uaa:
