@@ -127,20 +127,12 @@ nginx
 Usage
 =====
 
-This cookbook contains two components, `cloud_controller::server` and
-`cloud_controller::database`. The default recipe runs both recipes.
+Deploy `cloud_controller` and all its requirements on a single node:
 
-`cloud_controller::database` is responsible for installing postgres and
-setting up a database with the proper permissions. To use it on a
-database node:
-
-    include_recipe "cloud_controller::database"
-
-`cloud_controller::server` will install a CloudController on the target
-node along with the necessary configuration files and init scripts to
-run it. To use it within your recipes:
-
-    include_recipe "cloud_controller::server"
+    run_list: "recipe[postgresql::server]",
+              "recipe[cloudfoundry-cloud_controller::database]",
+              "recipe[nats-server]",
+              "recipe[cloudfoundry-cloud_controller::server]"
 
 License and Author
 ==================
