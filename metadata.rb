@@ -9,6 +9,6 @@ version          "0.99.0"
   supports os
 end
 
-%w{ cloudfoundry database nginx postgresql rbenv }.each do |cb|
+%w{ cloudfoundry cloudfoundry-nginx database nginx postgresql rbenv }.each do |cb|
   depends cb
 end
