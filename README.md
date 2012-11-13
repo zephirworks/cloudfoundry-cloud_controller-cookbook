@@ -1,7 +1,13 @@
 Description
 ===========
 
-Installs and configures CloudFoundry CloudController
+Installs and configures the CloudFoundry cloud_controller component.
+
+The cloud_controller is a relatively complex piece of software with several
+prerequisites; the deployment architecture can also vary. This cookbook tries
+to handle several scenarios and to cater to different use cases (e.g. development,
+staging or production cloud); read the documentation carefully to understand the
+purpose of each recipe and the different options that are available.
 
 Requirements
 ============
@@ -64,13 +70,59 @@ database
 --------
 
 * `node['cloudfoundry_cloud_controller']['database']['name']` - The name of the database that CloudController will use. Defaults to `cloud_controller'`.
-* `node['cloudfoundry_cloud_controller']['database']['host']` - Hostname where CloudController's database is located. Defaults to `localhost'`.
+* `node['cloudfoundry_cloud_controller']['database']['user']` - The user to use when authenticatin to the database server. Defaults to `cloudfoundry'`.
+* `node['cloudfoundry_cloud_controller']['database']['password']` - The password to use when authenticatin to the database server. Defaults to `cloudfoundry'`.
 
 nginx
 -----
 
 * `node['cloudfoundry_cloud_controller']['nginx']['enable']` - Set to true to enable nginx in fron of the cloud_controller. Defaults to false.
 * `node['cloudfoundry_cloud_controller']['nginx']['instance_socket']` - Path to the socket to use for communication between nginx and the CloudController. Defaults to `/tmp/cloud_controller.sock'`.
+
+Recipes
+=======
+
+server
+------
+
+Install a cloud_controller on the target node along with the necessary
+configuration files and init scripts to run it.
+
+The cloud_controller requires access to a Nats, a PostgreSQL and a Redis
+server; these can run on the same or a different node. The default settings
+are for a self-contained node running all the services.
+
+In particular, if running a Chef client (non-solo), the recipe will:
+
+* search for a Nats server with a `cloudfoundry_nats_server` role in the
+same Chef environment; if found, it will use attributes from that node to
+build the connection URL;
+* assume a PostgreSQL server is running on the same node (FIXME);
+* search for a Redis server with a `cloudfoundry_redis_vcap` role in the
+same Chef environment. If found, it will use the IP address of that node; the
+configuration can be fine-tuned with `cloud_controller`-specific attributes
+(see above);
+
+If a service is not found via search, or if running a Chef Solo, the recipe will:
+
+* assume the Nats server is running on the same node; it will use the attributes
+from the `nats_server` cookbook (see the documentation for that cookbook for more
+information);
+* assume a Redis server is running on the same node.
+
+database
+--------
+
+Creates a PostgreSQL user and database for the `cloud_controller` to use.
+
+You should run this recipe on the node that holds the database.
+
+default
+-------
+
+nginx
+-----
+
 
 Usage
 =====

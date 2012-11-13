@@ -17,14 +17,14 @@
 # limitations under the License.
 #
 
-# The name of the database that CloudController will use.
+# The name of the database that cloud_controller will use.
 default['cloudfoundry_cloud_controller']['database']['name'] = 'cloud_controller'
 
-# Hostname where CloudController's database is located.
+# Hostname where cloud_controller's database is located.
 default['cloudfoundry_cloud_controller']['database']['host'] = 'localhost'
 
-# The name of the database that CloudController will use.
+# The name of the user to use when authenticatin to the database server.
 default['cloudfoundry_cloud_controller']['database']['user'] = 'cloudfoundry'
 
-# Hostname where CloudController's database is located.
+# The password to use when authenticatin to the database server.
 default['cloudfoundry_cloud_controller']['database']['password'] = 'cloudfoundry'
