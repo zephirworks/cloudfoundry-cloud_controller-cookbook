@@ -5,8 +5,8 @@ require 'cfoundry'
 describe 'cloudfoundry-cloud_controller::server' do
   include Helpers::CFCloudController
 
-  before(:all) do
-    sleep 5 # give the server some time to start up
+  before do
+    sleep 7 # give the server some time to start up
   end
 
   it 'starts a cloud_controller that accepts connections' do
