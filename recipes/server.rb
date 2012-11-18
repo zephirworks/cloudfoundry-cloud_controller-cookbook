@@ -89,21 +89,19 @@ template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
   owner node['cloudfoundry']['user']
 end
 
+cf_runtimes.each do |_,runtime|
+  runtime['frameworks'].each do |framework|
+    template File.join(node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'], "#{framework}.yml") do
+      source "#{framework}.yml.erb"
+      owner node['cloudfoundry']['user']
+    end
+  end
+end
+
 bash "run cloudfoundry migrations" do
   user node['cloudfoundry']['user']
   cwd  install_path
   code "PATH=\"#{ruby_path}:$PATH\" #{File.join(ruby_path, "bundle")} exec rake db:migrate RAILS_ENV=production CLOUD_CONTROLLER_CONFIG='#{config_file}'"
   subscribes :run, resources(:cloudfoundry_source => "cloud_controller")
   action :nothing
-end
-
-# Write config files for each framework so that cloud_controller can
-# detect what kind of application it's dealing with.
-if !node['cloudfoundry_cloud_controller']['server']['frameworks'] ||
-    node['cloudfoundry_cloud_controller']['server']['frameworks'].empty?
-  Chef::Log.info "No frameworks specified, skipping framework configs."
-else
-  node['cloudfoundry_cloud_controller']['server']['frameworks'].each do |_, framework|
-    include_recipe framework[:cookbook]
-  end
 end
