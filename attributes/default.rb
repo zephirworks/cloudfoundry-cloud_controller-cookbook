@@ -30,4 +30,4 @@ default['cloudfoundry_cloud_controller']['vcap']['repo']         = "https://gith
 
 # Git reference to use when fetching the CloudFoundry code. Can be
 # either a specific sha or a reference such as `HEAD` or `master`.
-default['cloudfoundry_cloud_controller']['vcap']['reference']    = "147ece8f3662a598acb27732c182c57c4701e73b"
+default['cloudfoundry_cloud_controller']['vcap']['reference']    = "31ab65cdf0b9863677675b3812aac7305001267e"
