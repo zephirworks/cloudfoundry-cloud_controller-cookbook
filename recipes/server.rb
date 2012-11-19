@@ -87,6 +87,7 @@ end
 template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
   source "runtimes.yml.erb"
   owner node['cloudfoundry']['user']
+  mode 0644
 end
 
 cf_runtimes.each do |_,runtime|
@@ -94,6 +95,7 @@ cf_runtimes.each do |_,runtime|
     template File.join(node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'], "#{framework}.yml") do
       source "#{framework}.yml.erb"
       owner node['cloudfoundry']['user']
+      mode 0644
     end
   end
 end
