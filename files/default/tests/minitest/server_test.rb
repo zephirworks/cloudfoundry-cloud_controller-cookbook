@@ -27,7 +27,7 @@ describe 'cloudfoundry-cloud_controller::server' do
   it 'starts a cloud_controller with no frameworks' do
     test_user = create_user
     user = client.login(:username => test_user, :password => "password")
-    client.frameworks.must_equal nil
+    client.frameworks.must_equal []
   end
 
   it 'starts a cloud_controller with no services' do

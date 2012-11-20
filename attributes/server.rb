@@ -39,10 +39,7 @@ default['cloudfoundry_cloud_controller']['server']['max_staging_runtime'] = 120
 # An array containing the email addresses of all server admins.
 default['cloudfoundry_cloud_controller']['server']['admins'] = []
 
-# An array containing the name of each framework supported by your
-# CloudFoundry instance. Due to a quirk in cloud_controller, you _must_
-# have rails3 and sinatra listed as frameworks.
-default['cloudfoundry_cloud_controller']['server']['frameworks'] = []
+default['cloudfoundry_cloud_controller']['server']['frameworks'] = {}
 
 default['cloudfoundry_cloud_controller']['server']['services'] = [
   'mysql',

@@ -1,0 +1,38 @@
+---
+<% if cf_runtimes_include?('ruby18') -%>
+<% info = cf_runtimes_get('ruby18') %>
+<% ruby_path = File.dirname(info['executable']) %>
+ruby18:
+  version: "<%= info['version'] %>"
+  description: "Ruby 1.8.7"
+  executable: "<%= info['executable'] %>"
+  version_flag: "-e 'puts RUBY_VERSION'"
+  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 357'"
+  version_output: 1.8.7
+  environment:
+    PATH: <%= ruby_path %>:$PATH
+    BUNDLE_GEMFILE:
+  status:
+    name: current
+  series: ruby18
+  category: ruby
+<%- end %>
+
+<% if cf_runtimes_include?('ruby19') -%>
+<% info = cf_runtimes_get('ruby19') %>
+<% ruby_path = File.dirname(info['executable']) %>
+ruby19:
+  version: "<%= info['version'] %>"
+  description: "Ruby 1.9.2"
+  executable: "<%= info['executable'] %>"
+  version_flag: "-e 'puts RUBY_VERSION'"
+  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 180'"
+  version_output: 1.9.2
+  environment:
+    PATH: <%= ruby_path %>:$PATH
+    BUNDLE_GEMFILE:
+  status:
+    name: current
+  series: ruby19
+  category: ruby
+<%- end %>
