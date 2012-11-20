@@ -3,11 +3,11 @@ name: "sinatra"
 runtimes:
 <% if cf_runtimes_include?('ruby18') -%>
   - "ruby18":
-    default: true
+      default: true
 <%- end %>
 <% if cf_runtimes_include?('ruby19') -%>
   - "ruby19":
-    default: false
+      default: false
 <%- end %>
 detection:
   - "*.rb": "\\s*require[\\s\\(]*['\"]sinatra(/base)?['\"]" # .rb files in the root dir containing a require?
