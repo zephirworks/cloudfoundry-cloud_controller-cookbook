@@ -1,7 +1,9 @@
 Description
 ===========
 
-Installs and configures the CloudFoundry cloud_controller component.
+Install the Cloud Foundry [cloud_controller](https://github.com/cloudfoundry/cloud_controller),
+a mandatory component of a [Cloud Foundry](http://www.cloudfoundry.org)
+installation.
 
 The cloud_controller is a relatively complex piece of software with several
 prerequisites; the deployment architecture can also vary. This cookbook tries
