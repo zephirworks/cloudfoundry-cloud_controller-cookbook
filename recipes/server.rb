@@ -21,9 +21,7 @@
 include_recipe "cloudfoundry::user"
 include_recipe "postgresql::client"
 
-%w[libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev unzip zip].each do |pkg|
-  package pkg
-end
+include_recipe "cloudfoundry-cloud_controller::install_deps"
 
 #
 # Install the correct rbenv
