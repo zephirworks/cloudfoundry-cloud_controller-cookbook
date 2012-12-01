@@ -133,7 +133,7 @@ Deploy `cloud_controller` and all its requirements on a single node:
 
     run_list: "recipe[postgresql::server]",
               "recipe[cloudfoundry-cloud_controller::database]",
-              "recipe[nats-server]",
+              "recipe[nats::server]",
               "recipe[cloudfoundry-cloud_controller::server]"
 
 License and Author

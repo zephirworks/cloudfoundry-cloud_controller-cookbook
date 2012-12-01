@@ -1,6 +1,6 @@
 include_recipe "postgresql::server"
 include_recipe "cloudfoundry-cloud_controller::database"
-include_recipe "nats-server"
+include_recipe "nats::server"
 
 chef_gem "cfoundry"
 
