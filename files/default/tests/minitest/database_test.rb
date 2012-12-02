@@ -10,17 +10,13 @@ describe 'cloudfoundry-cloud_controller::database' do
   include Helpers::CFCloudController
 
   it 'creates a cloudfoundry user' do
-    unless is_pg_buggy?(node)
-      db = connect('template1', 'cloudfoundry', 'cloudfoundry')
-      db.wont_be_nil
-    end
+    db = connect('template1', 'cloudfoundry', 'cloudfoundry')
+    db.wont_be_nil
   end
 
   it 'creates a cloud_controller database' do
-    unless is_pg_buggy?(node)
-      db = connect('template1', 'cloudfoundry', 'cloudfoundry')
-      db.query("select * from pg_database where datname = 'cloud_controller'").num_tuples.must_equal 1
-    end
+    db = connect('template1', 'cloudfoundry', 'cloudfoundry')
+    db.query("select * from pg_database where datname = 'cloud_controller'").num_tuples.must_equal 1
   end
 
 protected
