@@ -19,7 +19,7 @@
 
 node.default['cloudfoundry_cloud_controller']['nginx']['enable'] = true
 
-include_recipe "cloudfoundry-nginx::lua_module"
+include_recipe "cloudfoundry-nginx"
 
 template File.join(node['nginx']['dir'], "sites-available", "cloud_controller") do
   source "nginx.conf.erb"
@@ -29,12 +29,9 @@ template File.join(node['nginx']['dir'], "sites-available", "cloud_controller") 
   notifies :restart, resources(:service => "nginx")
 end
 
-nginx_site "cloud_controller" do
-  nxpath File.join(node['nginx']['path'], "sbin")
-end
+nginx_site "cloud_controller"
 
 # nginx recipe adds a default site. It gets in our way, so we remove it.
 nginx_site "default" do
-  nxpath File.join(node['nginx']['path'], "sbin")
   enable false
 end

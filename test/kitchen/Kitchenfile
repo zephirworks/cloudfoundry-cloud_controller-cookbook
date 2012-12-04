@@ -2,5 +2,6 @@ cookbook "cloudfoundry-cloud_controller" do
   configuration "database"
   configuration "server"
   configuration "server_with_ruby"
+  configuration "nginx"
   runtimes []
 end
