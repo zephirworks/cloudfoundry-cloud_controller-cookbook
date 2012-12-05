@@ -27,7 +27,7 @@ describe 'cloudfoundry-cloud_controller::server' do
     it 'creates a rails3 config file with the expected content' do
       config = YAML.load_file('/var/vcap/data/cloud_controller/staging_manifests/rails3.yml')
       config['name'].must_equal 'rails3'
-      config['runtimes'].must_equal [{ 'ruby19' => { 'default' => false } }]
+      config['runtimes'].must_equal [{ 'ruby19' => { 'default' => true } }]
     end
   end
 end
