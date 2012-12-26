@@ -13,8 +13,8 @@ nginx:
   instance_socket: <%= node['cloudfoundry_cloud_controller']['nginx']['instance_socket'] %>
   <%- end %>
 
-# Allow applications to register URIs that are outside your domain.
 # Legacy (FIXME REMOVE)
+# Can't be removed yet since CC checks to make sure it's present
 allow_external_app_uris: <%= node['cloudfoundry_cloud_controller']['server']['allow_external_app_uris'] %>
 
 app_uris:
