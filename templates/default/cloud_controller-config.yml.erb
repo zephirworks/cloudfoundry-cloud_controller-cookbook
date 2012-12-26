@@ -48,15 +48,6 @@ mbus: <%= cf_mbus_url %>
 
 rails_environment: production
 
-# redis for new stager
-redis:
-  <% redis_node = cf_vcap_redis_node || node %>
-  host: <%= redis_node.attribute?('cloud') ? redis_node['cloud']['local_ipv4'] : redis_node['ipaddress'] %>
-  port: <%= node['cloudfoundry_cloud_controller']['redis']['port'] %>
-  <% if node['cloudfoundry_cloud_controller']['redis']['password'] -%>
-  password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
-  <%- end %>
-
 database_environment:
   production:
     database: <%= node['cloudfoundry_cloud_controller']['database']['name'] %>
@@ -68,25 +59,33 @@ database_environment:
     adapter: postgresql
     timeout: 2000
     template: template0 # Required for utf8 encoding
-# App staging parameters
-staging:
-  # Max duration for staging process
-  max_staging_runtime:    <%= node['cloudfoundry_cloud_controller']['server']['max_staging_runtime'] %>
 
-  auth:
-    user: <%= node['cloudfoundry_cloud_controller']['stager']['user'] %>
-    password: <%= node['cloudfoundry_cloud_controller']['stager']['password'] %>
-
-# Disable the use of the uaa (our cookbooks don't support it yet).
 uaa:
   enabled: false
   url: http://uaa.vcap.me
   resource_id: cloud_controller
-  token_secret: tokensecret
-  client_secret: cloudcontrollerclientsecret
+  token_secret:
+  client_secret:
+  token_creation_email_filter:
 
-# admin support
+redis:
+  <% redis_node = cf_vcap_redis_node || node %>
+  host: <%= redis_node.attribute?('cloud') ? redis_node['cloud']['local_ipv4'] : redis_node['ipaddress'] %>
+  port: <%= node['cloudfoundry_cloud_controller']['redis']['port'] %>
+  <% if node['cloudfoundry_cloud_controller']['redis']['password'] -%>
+  password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
+  <%- end %>
+
+staging:
+  max_staging_runtime:    <%= node['cloudfoundry_cloud_controller']['server']['max_staging_runtime'] %>
+  auth:
+    user: <%= node['cloudfoundry_cloud_controller']['stager']['user'] %>
+    password: <%= node['cloudfoundry_cloud_controller']['stager']['password'] %>
+
+allow_debug: <%= node['cloudfoundry_cloud_controller']['server']['allow_debug'] %>
+
 admins: [ <%= node['cloudfoundry_cloud_controller']['server']['admins'].join(", ") %> ]
+
 https_required: false
 https_required_for_admins: false
 
@@ -106,8 +105,5 @@ builtin_services:
 service_proxy:
   token: [ <%= node['cloudfoundry']['service_token'] %> ]
 <%- end %>
-
-# Enable/disable starting apps in debug modes.
-allow_debug: <%= node['cloudfoundry_cloud_controller']['server']['allow_debug'] %>
 
 runtimes_file: <%= File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") %>
