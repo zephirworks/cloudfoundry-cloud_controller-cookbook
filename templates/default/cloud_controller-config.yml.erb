@@ -48,6 +48,15 @@ rails_logging:
   level: <%= node['cloudfoundry_cloud_controller']['server']['log_level'] %>
   file: <%= node['cloudfoundry_cloud_controller']['server']['rails_log_file'] %>
 
+# redis for new stager
+redis:
+  <% redis_node = cf_vcap_redis_node || node %>
+  host: <%= redis_node.attribute?('cloud') ? redis_node['cloud']['local_ipv4'] : redis_node['ipaddress'] %>
+  port: <%= node['cloudfoundry_cloud_controller']['redis']['port'] %>
+  <% if node['cloudfoundry_cloud_controller']['redis']['password'] -%>
+  password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
+  <%- end %>
+
 directories:
   droplets: <%= node['cloudfoundry_cloud_controller']['server']['droplets_dir'] %>
   resources: <%= node['cloudfoundry_cloud_controller']['server']['resources_dir'] %>
@@ -80,15 +89,6 @@ staging:
   auth:
     user: <%= node['cloudfoundry_cloud_controller']['stager']['user'] %>
     password: <%= node['cloudfoundry_cloud_controller']['stager']['password'] %>
-
-# redis for new stager
-redis:
-  <% redis_node = cf_vcap_redis_node || node %>
-  host: <%= redis_node.attribute?('cloud') ? redis_node['cloud']['local_ipv4'] : redis_node['ipaddress'] %>
-  port: <%= node['cloudfoundry_cloud_controller']['redis']['port'] %>
-  <% if node['cloudfoundry_cloud_controller']['redis']['password'] -%>
-  password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
-  <%- end %>
 
 # Disable the use of the uaa (our cookbooks don't support it yet).
 uaa:
