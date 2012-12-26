@@ -5,6 +5,13 @@ description: <%= node['cloudfoundry_cloud_controller']['server']['welcome'] %>
 support_address: <%= node['cloudfoundry_cloud_controller']['server']['support_address'] %>
 local_route: <%= node['cloudfoundry']['local_route'] %>
 allow_registration: <%= node['cloudfoundry_cloud_controller']['server']['allow_registration'] %>
+external_port: <%= node['cloudfoundry_cloud_controller']['server']['external_port'] %> #public CC port
+
+nginx:
+  use_nginx: <%= node['cloudfoundry_cloud_controller']['nginx']['enable'] %>
+  <% if node['cloudfoundry_cloud_controller']['nginx']['enable'] -%>
+  instance_socket: <%= node['cloudfoundry_cloud_controller']['nginx']['instance_socket'] %>
+  <%- end %>
 
 # Allow applications to register URIs that are outside your domain.
 # Legacy (FIXME REMOVE)
@@ -16,15 +23,6 @@ app_uris:
 #  reserved_file:
 #  reserved_list: [www, test, dash, register, foo, bar]
 #  reserved_length: 3
-
-external_port: <%= node['cloudfoundry_cloud_controller']['server']['external_port'] %> #public CC port
-
-# nginx proxy provide multiple functions including offloading of file uploads/downloads.
-nginx:
-  use_nginx: <%= node['cloudfoundry_cloud_controller']['nginx']['enable'] %>
-  <% if node['cloudfoundry_cloud_controller']['nginx']['enable'] -%>
-  instance_socket: <%= node['cloudfoundry_cloud_controller']['nginx']['instance_socket'] %>
-  <%- end %>
 
 logging:
   level: <%= node['cloudfoundry_cloud_controller']['server']['log_level'] %>
