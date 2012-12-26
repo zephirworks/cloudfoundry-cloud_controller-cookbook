@@ -85,6 +85,7 @@ end
 template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
   source "runtimes.yml.erb"
   owner node['cloudfoundry']['user']
+  group node['cloudfoundry']['group']
   mode 0644
 end
 
