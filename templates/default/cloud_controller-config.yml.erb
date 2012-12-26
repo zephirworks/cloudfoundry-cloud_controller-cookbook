@@ -24,6 +24,12 @@ app_uris:
 #  reserved_list: [www, test, dash, register, foo, bar]
 #  reserved_length: 3
 
+directories:
+  droplets: <%= node['cloudfoundry_cloud_controller']['server']['droplets_dir'] %>
+  resources: <%= node['cloudfoundry_cloud_controller']['server']['resources_dir'] %>
+  staging_manifests: <%= node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] %>
+  tmpdir: <%= node['cloudfoundry_cloud_controller']['server']['tmp_dir'] %>
+
 logging:
   level: <%= node['cloudfoundry_cloud_controller']['server']['log_level'] %>
   file: <%= node['cloudfoundry_cloud_controller']['server']['log_file'] %>
@@ -31,6 +37,16 @@ logging:
 rails_logging:
   level: <%= node['cloudfoundry_cloud_controller']['server']['log_level'] %>
   file: <%= node['cloudfoundry_cloud_controller']['server']['rails_log_file'] %>
+
+keys:
+  password: 'password key goes here'
+  token: 'token key goes here'
+
+pid: <%= node['cloudfoundry_cloud_controller']['server']['pid_file'] %>
+
+mbus: <%= cf_mbus_url %>
+
+rails_environment: production
 
 # redis for new stager
 redis:
@@ -41,19 +57,6 @@ redis:
   password: <%= node['cloudfoundry_cloud_controller']['redis']['password'] %>
   <%- end %>
 
-directories:
-  droplets: <%= node['cloudfoundry_cloud_controller']['server']['droplets_dir'] %>
-  resources: <%= node['cloudfoundry_cloud_controller']['server']['resources_dir'] %>
-  staging_manifests: <%= node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] %>
-  tmpdir: <%= node['cloudfoundry_cloud_controller']['server']['tmp_dir'] %>
-
-# NATS message bus URI
-mbus: <%= cf_mbus_url %>
-keys:
-  password: 'password key goes here'
-  token: 'token key goes here'
-pid: <%= node['cloudfoundry_cloud_controller']['server']['pid_file'] %>
-rails_environment: production
 database_environment:
   production:
     database: <%= node['cloudfoundry_cloud_controller']['database']['name'] %>
