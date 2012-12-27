@@ -1,3 +1,9 @@
+## v1.1.1:
+
+* Fix minor errors in the nginx template.
+* Update tests broken by earlier changes.
+* Misc cleanup in templates, tests and dependencies.
+
 ## v1.1.0:
 
 * [#2] Complete support for nginx in front of the cloud_controller.
