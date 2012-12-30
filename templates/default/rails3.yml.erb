@@ -1,13 +1,9 @@
 ---
 name: "rails3"
 runtimes:
-<% if cf_runtimes_include?('ruby18') -%>
-  - "ruby18":
-      default: <%= !cf_runtimes_include?('ruby19') %>
-<%- end %>
-<% if cf_runtimes_include?('ruby19') -%>
-  - "ruby19":
-      default: true
+<% @runtimes.each do |runtime| -%>
+  - "<%= runtime %>":
+      default: false
 <%- end %>
 detection:
   - "config/application.rb": true

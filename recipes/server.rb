@@ -104,13 +104,21 @@ template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
   mode 0644
 end
 
-cf_runtimes.each do |_,runtime|
-  runtime['frameworks'].each do |framework|
-    template File.join(node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'], "#{framework}.yml") do
-      source "#{framework}.yml.erb"
-      owner node['cloudfoundry']['user']
-      mode 0644
-    end
+frameworks = {}
+cf_runtimes.each do |runtime,info|
+  info['frameworks'].each do |framework|
+    frameworks[framework] ||= []
+    frameworks[framework] << runtime
+  end
+end
+
+frameworks.each_pair do |framework,runtimes|
+  template File.join(node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'], "#{framework}.yml") do
+    source "#{framework}.yml.erb"
+    owner node['cloudfoundry']['user']
+    group node['cloudfoundry']['group']
+    mode 0644
+    variables(:runtimes => runtimes)
   end
 end
 
