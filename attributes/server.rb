@@ -43,12 +43,6 @@ default['cloudfoundry_cloud_controller']['server']['external_port'] = 9022
 # Log level for the CloudFoundry application.
 default['cloudfoundry_cloud_controller']['server']['log_level'] = 'info'
 
-# TODO (trotter): Find out how this differes from `rails_log_file`.
-default['cloudfoundry_cloud_controller']['server']['log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller.log"
-
-# TODO (trotter): Find out how this differs from `log_file`.
-default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller-rails.log"
-
 # TODO (trotter): Find out what this means.
 default['cloudfoundry_cloud_controller']['server']['allow_debug'] = true
 
@@ -68,19 +62,3 @@ default['cloudfoundry_cloud_controller']['server']['services'] = [
 
 # Set to true to enable the service_proxy service.
 default['cloudfoundry_cloud_controller']['server']['service_proxy'] = false
-
-# Where to store the pid_file for the CloudController.
-default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")
-
-# Path to a directory that will hold the staged droplets.
-default['cloudfoundry_cloud_controller']['server']['droplets_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "droplets")
-
-# Path to a directory that will hold a copy of all uploaded files for de-duplication.
-default['cloudfoundry_cloud_controller']['server']['resources_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "resources")
-
-# Path to a directory that will hold staging manifest files.
-default['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "staging_manifests")
-
-# Path to a directory that will hold the temporary files, such as uploaded applications.
-default['cloudfoundry_cloud_controller']['server']['tmp_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "tmp")
-
