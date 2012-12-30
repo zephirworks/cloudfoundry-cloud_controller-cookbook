@@ -101,7 +101,7 @@ builtin_services:
 
 <% if node['cloudfoundry_cloud_controller']['server']['service_proxy'] -%>
 service_proxy:
-  token: [ <%= node['cloudfoundry']['service_proxy'] %> ]
+  token: [ <%= node['cloudfoundry']['service_token'] %> ]
 <%- end %>
 
 # Enable/disable starting apps in debug modes.
