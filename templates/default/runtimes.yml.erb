@@ -13,7 +13,7 @@ ruby18:
     PATH: <%= ruby_path %>:$PATH
     BUNDLE_GEMFILE:
   status:
-    name: current
+    name: previous
   series: ruby18
   category: ruby
 <%- end %>
@@ -33,6 +33,25 @@ ruby19:
     BUNDLE_GEMFILE:
   status:
     name: current
+  series: ruby19
+  category: ruby
+<%- end %>
+
+<% if cf_runtimes_include?('ruby193') -%>
+<% info = cf_runtimes_get('ruby193') %>
+<% ruby_path = File.dirname(info['executable']) %>
+ruby193:
+  version: "<%= info['version'] %>"
+  description: "Ruby 1.9.3"
+  executable: "<%= info['executable'] %>"
+  version_flag: "-e 'puts RUBY_VERSION'"
+  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 194'"
+  version_output: 1.9.3
+  environment:
+    PATH: <%= ruby_path %>:$PATH
+    BUNDLE_GEMFILE:
+  status:
+    name: next
   series: ruby19
   category: ruby
 <%- end %>
