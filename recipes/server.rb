@@ -54,6 +54,7 @@ rbenv_ruby ruby_ver
   directory node['cloudfoundry'][d] do
     recursive true
     owner node['cloudfoundry']['user']
+    group node['cloudfoundry']['group']
     mode  0755
   end
 end
@@ -61,6 +62,7 @@ end
   directory node['cloudfoundry_cloud_controller'][d] do
     recursive true
     owner node['cloudfoundry']['user']
+    group node['cloudfoundry']['group']
     mode  '0755'
   end
 end
@@ -68,6 +70,7 @@ end
   directory node['cloudfoundry_cloud_controller']['server'][d] do
     recursive true
     owner node['cloudfoundry']['user']
+    group node['cloudfoundry']['group']
     mode  '0755'
   end
 end
