@@ -4,11 +4,13 @@
 <% ruby_path = File.dirname(info['executable']) %>
 ruby18:
   version: "<%= info['version'] %>"
-  description: "Ruby 1.8.7"
+  description: "<%= info['description'] %>"
   executable: "<%= info['executable'] %>"
-  version_flag: "-e 'puts RUBY_VERSION'"
-  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 357'"
-  version_output: 1.8.7
+  version_flag: "<%= info['version_flag'] %>"
+  <% if info['additional_checks'] -%>
+  additional_checks: "<%= info['additional_checks'] %>"
+  <%- end %>
+  version_output: "<%= info['version_output'] %>"
   environment:
     PATH: <%= ruby_path %>:$PATH
     BUNDLE_GEMFILE:
@@ -23,11 +25,13 @@ ruby18:
 <% ruby_path = File.dirname(info['executable']) %>
 ruby19:
   version: "<%= info['version'] %>"
-  description: "Ruby 1.9.2"
+  description: "<%= info['description'] %>"
   executable: "<%= info['executable'] %>"
-  version_flag: "-e 'puts RUBY_VERSION'"
-  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 180'"
-  version_output: 1.9.2
+  version_flag: "<%= info['version_flag'] %>"
+  <% if info['additional_checks'] -%>
+  additional_checks: "<%= info['additional_checks'] %>"
+  <%- end %>
+  version_output: "<%= info['version_output'] %>"
   environment:
     PATH: <%= ruby_path %>:$PATH
     BUNDLE_GEMFILE:
@@ -42,11 +46,13 @@ ruby19:
 <% ruby_path = File.dirname(info['executable']) %>
 ruby193:
   version: "<%= info['version'] %>"
-  description: "Ruby 1.9.3"
+  description: "<%= info['description'] %>"
   executable: "<%= info['executable'] %>"
-  version_flag: "-e 'puts RUBY_VERSION'"
-  additional_checks: "-e 'puts RUBY_PATCHLEVEL == 194'"
-  version_output: 1.9.3
+  version_flag: "<%= info['version_flag'] %>"
+  <% if info['additional_checks'] -%>
+  additional_checks: "<%= info['additional_checks'] %>"
+  <%- end %>
+  version_output: "<%= info['version_output'] %>"
   environment:
     PATH: <%= ruby_path %>:$PATH
     BUNDLE_GEMFILE:
