@@ -94,7 +94,7 @@ cloudfoundry_component "cloud_controller" do
   pid_file node['cloudfoundry_cloud_controller']['server']['pid_file']
   log_file node['cloudfoundry_cloud_controller']['server']['log_file']
   action        [:create, :enable]
-  subscribes    :restart, resources(:cloudfoundry_source => "cloud_controller")
+  subscribes    :restart, "cloudfoundry_source[cloud_controller]"
 end
 
 template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
@@ -126,6 +126,6 @@ bash "run cloudfoundry migrations" do
   user node['cloudfoundry']['user']
   cwd  install_path
   code "PATH=\"#{ruby_path}:$PATH\" #{File.join(ruby_path, "bundle")} exec rake db:migrate RAILS_ENV=production CLOUD_CONTROLLER_CONFIG='#{config_file}'"
-  subscribes :run, resources(:cloudfoundry_source => "cloud_controller")
+  subscribes :run, "cloudfoundry_source[cloud_controller]"
   action :nothing
 end

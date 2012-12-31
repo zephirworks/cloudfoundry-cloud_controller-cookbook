@@ -26,7 +26,7 @@ template File.join(node['nginx']['dir'], "sites-available", "cloud_controller") 
   owner  "root"
   group  "root"
   mode   "0644"
-  notifies :restart, resources(:service => "nginx")
+  notifies :restart, "service[nginx]"
 end
 
 nginx_site "cloud_controller"
