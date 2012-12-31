@@ -1,3 +1,4 @@
+name             "cloudfoundry-cloud_controller"
 maintainer       "Andrea Campi"
 maintainer_email "andrea.campi@zephirworks.com"
 license          "Apache 2.0"
