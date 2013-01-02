@@ -102,6 +102,7 @@ template File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") do
   owner node['cloudfoundry']['user']
   group node['cloudfoundry']['group']
   mode 0644
+  notifies :restart, "cloudfoundry_component[cloud_controller]"
 end
 
 frameworks = {}
@@ -119,6 +120,7 @@ frameworks.each_pair do |framework,runtimes|
     group node['cloudfoundry']['group']
     mode 0644
     variables(:runtimes => runtimes)
+    notifies :restart, "cloudfoundry_component[cloud_controller]"
   end
 end
 
