@@ -48,6 +48,8 @@ mbus: <%= cf_mbus_url %>
 
 rails_environment: production
 
+new_initial_placement: <%= node['cloudfoundry_cloud_controller']['server']['new_initial_placement'] %>
+
 database_environment:
   production:
     database: <%= node['cloudfoundry_cloud_controller']['database']['name'] %>

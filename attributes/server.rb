@@ -62,3 +62,6 @@ default['cloudfoundry_cloud_controller']['server']['services'] = [
 
 # Set to true to enable the service_proxy service.
 default['cloudfoundry_cloud_controller']['server']['service_proxy'] = false
+
+# Set to true to enable the new policy for assigning apps to DEAs.
+default['cloudfoundry_cloud_controller']['server']['new_initial_placement'] = true

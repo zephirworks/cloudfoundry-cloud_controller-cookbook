@@ -67,6 +67,9 @@ server
 * `node['cloudfoundry_cloud_controller']['server']['resources_dir']` - Path to a directory that will hold a copy of all uploaded files for de-duplication. Defaults to `"#{node.default['cloudfoundry']['shared_dir']}/resources"`.
 * `node['cloudfoundry_cloud_controller']['server']['staging_manifests_dir']` - Path to a directory that will hold staging manifest files.. Defaults to `"#{node.default['cloudfoundry']['shared_dir']}/staging_manifests"`.
 * `node['cloudfoundry_cloud_controller']['server']['tmp_dir']` - Path to a directory that will hold the temporary files, such as uploaded applications. Defaults to `"#{node.default['cloudfoundry']['shared_dir']}/tmp"`.
+* `node['cloudfoundry_cloud_controller']['server']['new_initial_placement']` -
+  Set to true to enable the new policy for assigning apps to DEAs. Defaults to
+  `true`.
 
 database
 --------
