@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: cloudfoundry-cloud_controller
-# Recipe:: install_deps
+# Recipe:: _server_deps
 #
 # Copyright 2012, ZephirWorks
 # Copyright 2012, Trotter Cashion
@@ -18,8 +18,16 @@
 # limitations under the License.
 #
 
+node.default['cloudfoundry_cloud_controller']['ruby_version'] = node['cloudfoundry']['ruby_1_9_2_version']
+
+include_recipe "cloudfoundry::user"
+include_recipe "postgresql::client"
 include_recipe "postgresql::ruby"
+include_recipe "rbenv::default"
+include_recipe "rbenv::ruby_build"
 
 %w[libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev unzip zip].each do |pkg|
   package pkg
 end
+
+rbenv_ruby node['cloudfoundry_cloud_controller']['ruby_version']

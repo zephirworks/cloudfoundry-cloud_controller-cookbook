@@ -33,24 +33,9 @@ node.default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{n
 node.default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")
 
 #
-# Include recipes
+# Install dependencies
 #
-include_recipe "cloudfoundry::user"
-include_recipe "postgresql::client"
-
-include_recipe "cloudfoundry-cloud_controller::install_deps"
-
-#
-# Install the correct rbenv
-#
-node.default['cloudfoundry_cloud_controller']['ruby_version'] = node['cloudfoundry']['ruby_1_9_2_version']
-ruby_ver = node['cloudfoundry_cloud_controller']['ruby_version']
-ruby_path = ruby_bin_path(ruby_ver)
-
-include_recipe "rbenv::default"
-include_recipe "rbenv::ruby_build"
-
-rbenv_ruby ruby_ver
+include_recipe "cloudfoundry-cloud_controller::_server_deps"
 
 #
 # Create all the directories we are going to need
@@ -85,6 +70,8 @@ end
 #
 config_file  = File.join(node['cloudfoundry']['config_dir'], "cloud_controller.yml")
 install_path = File.join(node['cloudfoundry_cloud_controller']['vcap']['install_path'], "cloud_controller")
+ruby_ver = node['cloudfoundry_cloud_controller']['ruby_version']
+ruby_path = ruby_bin_path(ruby_ver)
 
 cloudfoundry_source "cloud_controller" do
   path          node['cloudfoundry_cloud_controller']['vcap']['install_path']
