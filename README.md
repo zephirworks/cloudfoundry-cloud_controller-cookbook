@@ -145,7 +145,7 @@ License and Author
 Author:: Andrea Campi (<andrea.campi@zephirworks.com>)
 Author:: Trotter Cashion (<cashion@gmail.com>)
 
-Copyright:: 2012 ZephirWorks
+Copyright:: 2012-2013 ZephirWorks
 Copyright:: 2012 Trotter Cashion
 
 Licensed under the Apache License, Version 2.0 (the "License");

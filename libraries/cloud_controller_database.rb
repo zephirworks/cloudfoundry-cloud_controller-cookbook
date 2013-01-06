@@ -2,7 +2,7 @@
 # Cookbook Name:: cloudfoundry-cloud_controller
 # Libraries:: cloud_controller_database
 #
-# Copyright 2012, ZephirWorks
+# Copyright 2012-2013, ZephirWorks
 # Copyright 2012, Trotter Cashion
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
