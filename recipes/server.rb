@@ -18,6 +18,9 @@
 # limitations under the License.
 #
 
+#
+# Dynamic attributes
+#
 node.default['cloudfoundry_cloud_controller']['data_dir'] = ::File.join(node['cloudfoundry']['data_dir'], "cloud_controller")
 node.default['cloudfoundry_cloud_controller']['server']['droplets_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "droplets")
 node.default['cloudfoundry_cloud_controller']['server']['resources_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "resources")
@@ -29,7 +32,9 @@ node.default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{n
 
 node.default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")
 
-
+#
+# Include recipes
+#
 include_recipe "cloudfoundry::user"
 include_recipe "postgresql::client"
 
