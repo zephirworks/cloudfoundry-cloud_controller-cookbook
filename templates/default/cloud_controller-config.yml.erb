@@ -1,4 +1,7 @@
 ---
+<%
+  ccdb = cloud_controller_database
+%>
 # Cloud Controller URI
 external_uri: api.<%= node['cloudfoundry_cloud_controller']['server']['domain'] %>
 description: <%= node['cloudfoundry_cloud_controller']['server']['welcome'] %>
@@ -52,12 +55,12 @@ new_initial_placement: <%= node['cloudfoundry_cloud_controller']['server']['new_
 
 database_environment:
   production:
-    database: <%= node['cloudfoundry_cloud_controller']['database']['name'] %>
-    host: <%= node['cloudfoundry_cloud_controller']['database']['host'] %>
-    port: 5432
+    database: <%= ccdb[:name] %>
+    host: <%= ccdb[:host] %>
+    port: <%= ccdb[:port] %>
     encoding: utf8
-    username: <%= node['cloudfoundry_cloud_controller']['database']['user'] %>
-    password: <%= node['cloudfoundry_cloud_controller']['database']['password'] %>
+    username: <%= ccdb[:user] %>
+    password: <%= ccdb[:password] %>
     adapter: postgresql
     timeout: 2000
     template: template0 # Required for utf8 encoding
