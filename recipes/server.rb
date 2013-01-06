@@ -32,6 +32,9 @@ node.default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{n
 
 node.default['cloudfoundry_cloud_controller']['server']['pid_file'] = File.join(node['cloudfoundry']['pid_dir'], "cloud_controller.pid")
 
+node.default['cloudfoundry_cloud_controller']['server']['domain'] = node['cloudfoundry']['domain']
+node.default['cloudfoundry_cloud_controller']['server']['external_uri'] = "api.#{node['cloudfoundry_cloud_controller']['server']['domain']}"
+
 #
 # Install dependencies
 #

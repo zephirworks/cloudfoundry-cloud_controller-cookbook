@@ -3,7 +3,7 @@
   ccdb = cloud_controller_database
 %>
 # Cloud Controller URI
-external_uri: api.<%= node['cloudfoundry_cloud_controller']['server']['domain'] %>
+external_uri: <%= node['cloudfoundry_cloud_controller']['server']['external_uri'] %>
 description: <%= node['cloudfoundry_cloud_controller']['server']['welcome'] %>
 support_address: <%= node['cloudfoundry_cloud_controller']['server']['support_address'] %>
 local_route: <%= node['cloudfoundry']['local_route'] %>
