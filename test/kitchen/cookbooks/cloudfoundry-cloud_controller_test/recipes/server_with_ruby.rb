@@ -22,5 +22,5 @@ redisio_service 5454 do
   action [:enable,:start]
 end
 
-include_recipe "cloudfoundry-ruby-runtime::ruby_1_9_2"
+include_recipe "cloudfoundry-ruby-runtime::ruby19"  # FIXME
 include_recipe "cloudfoundry-cloud_controller::server"
