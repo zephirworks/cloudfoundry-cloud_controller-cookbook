@@ -21,12 +21,6 @@
 #
 # Dynamic attributes
 #
-node.default['cloudfoundry_cloud_controller']['data_dir'] = ::File.join(node['cloudfoundry']['data_dir'], "cloud_controller")
-node.default['cloudfoundry_cloud_controller']['server']['droplets_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "droplets")
-node.default['cloudfoundry_cloud_controller']['server']['resources_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "resources")
-node.default['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "staging_manifests")
-node.default['cloudfoundry_cloud_controller']['server']['tmp_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "tmp")
-
 node.default['cloudfoundry_cloud_controller']['server']['log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller.log"
 node.default['cloudfoundry_cloud_controller']['server']['rails_log_file'] = "#{node['cloudfoundry']['log_dir']}/cloud_controller-rails.log"
 

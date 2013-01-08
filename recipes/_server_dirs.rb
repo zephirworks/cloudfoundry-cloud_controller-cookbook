@@ -18,6 +18,12 @@
 # limitations under the License.
 #
 
+node.default['cloudfoundry_cloud_controller']['data_dir'] = ::File.join(node['cloudfoundry']['data_dir'], "cloud_controller")
+node.default['cloudfoundry_cloud_controller']['server']['droplets_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "droplets")
+node.default['cloudfoundry_cloud_controller']['server']['resources_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "resources")
+node.default['cloudfoundry_cloud_controller']['server']['staging_manifests_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "staging_manifests")
+node.default['cloudfoundry_cloud_controller']['server']['tmp_dir'] = File.join(node['cloudfoundry_cloud_controller']['data_dir'], "tmp")
+
 %w[log_dir].each do |d|
   directory node['cloudfoundry'][d] do
     recursive true
