@@ -18,7 +18,9 @@
 # limitations under the License.
 #
 
-node.default['cloudfoundry_cloud_controller']['ruby_version'] = node['cloudfoundry']['ruby_1_9_2_version']
+node.default['cloudfoundry_cloud_controller']['ruby_version'] = node['cloudfoundry'].has_key?('ruby_version') ?
+                                                                  node['cloudfoundry']['ruby_version'] :
+                                                                  node['cloudfoundry']['ruby_1_9_2_version']
 
 include_recipe "cloudfoundry::user"
 include_recipe "postgresql::client"
