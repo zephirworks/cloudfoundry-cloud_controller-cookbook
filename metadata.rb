@@ -14,5 +14,5 @@ end
   depends cb
 end
 
-depends "cloudfoundry", "~> 1.2.0"
+depends "cloudfoundry", "~> 1.3.0"
 depends "cloudfoundry-nginx", "~> 1.0.2"
