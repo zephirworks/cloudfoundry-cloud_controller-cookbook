@@ -48,10 +48,12 @@ cloudfoundry_source "cloud_controller" do
   repository    node['cloudfoundry_cloud_controller']['vcap']['repo']
   reference     node['cloudfoundry_cloud_controller']['vcap']['reference']
   subdirectory  "cloud_controller"
+  ruby_version  ruby_ver
 end
 
 cloudfoundry_component "cloud_controller" do
   install_path install_path
+  ruby_version ruby_ver
   bin_file File.join(install_path, "bin", "cloud_controller")
   pid_file node['cloudfoundry_cloud_controller']['server']['pid_file']
   log_file node['cloudfoundry_cloud_controller']['server']['log_file']
