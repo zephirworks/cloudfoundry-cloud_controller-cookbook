@@ -43,8 +43,14 @@ def cloud_controller_database
 end
 
 def cloud_controller_database_from_attrs(n = node)
+  host = if n == node
+    n['cloudfoundry_cloud_controller']['database']['host']
+  else
+    n.attribute?('cloud') ? n['cloud']['local_ipv4'] : n['ipaddress']
+  end
+
   {
-    :host => n['cloudfoundry_cloud_controller']['database']['host'],
+    :host => host,
     :port => 5432,
     :name => n['cloudfoundry_cloud_controller']['database']['name'],
     :user => n['cloudfoundry_cloud_controller']['database']['user'],
