@@ -9,7 +9,7 @@ log_format cc '$host - [$time_local] '
 
 # keepalive_timeout  75 20; #inherited from router
 
-# client_max_body_size 256M; #already enforced upstream/but doesn't hurt.
+client_max_body_size 256M;
 
 upstream cloud_controller {
   server unix:<%= node['cloudfoundry_cloud_controller']['nginx']['instance_socket'] %>;
