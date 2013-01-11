@@ -21,3 +21,5 @@ end
 redisio_service 5454 do
   action [:enable,:start]
 end
+
+include_recipe "cloudfoundry-cloud_controller::nginx"
