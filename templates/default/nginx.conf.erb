@@ -17,7 +17,7 @@ server {
   listen    <%= node['cloudfoundry_cloud_controller']['server']['external_port'] %>;
   server_name  _;
   server_name_in_redirect off;
-  client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
+  client_max_body_size 256M;
 
   access_log  <%= node['nginx']['log_dir'] %>/nginx_cc_main.log  cc;
 
