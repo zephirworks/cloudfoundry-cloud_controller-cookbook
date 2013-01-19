@@ -111,4 +111,11 @@ service_proxy:
   token: [ <%= node['cloudfoundry']['service_token'] %> ]
 <%- end %>
 
+<% if node['cloudfoundry_cloud_controller']['lifecycle']['enable'] %>
+service_lifecycle:
+  max_upload_size: <%= node['cloudfoundry_cloud_controller']['lifecycle']['max_upload_size'] %>
+  upload_token: <%= node['cloudfoundry_cloud_controller']['lifecycle']['upload_token'] %>
+  upload_timeout: <%= node['cloudfoundry_cloud_controller']['lifecycle']['upload_timeout'] %>
+<% end %>
+
 runtimes_file: <%= File.join(node['cloudfoundry']['config_dir'], "runtimes.yml") %>
