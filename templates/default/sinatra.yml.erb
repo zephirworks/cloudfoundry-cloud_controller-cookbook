@@ -1,9 +1,19 @@
 ---
+<%
+  default_runtime = case
+  when @runtimes.include?('ruby193')
+    'ruby193'
+  when @runtimes.include?('ruby19')
+    'ruby19'
+  else
+    @runtimes.first
+  end
+%>
 name: "sinatra"
 runtimes:
 <% @runtimes.each do |runtime| -%>
   - "<%= runtime %>":
-      default: false
+      default: <%= runtime == default_runtime %>
 <%- end %>
 detection:
   - "*.rb": "\\s*require[\\s\\(]*['\"]sinatra(/base)?['\"]" # .rb files in the root dir containing a require?

@@ -1,9 +1,19 @@
 ---
+<%
+  default_runtime = case
+  when @runtimes.include?('ruby193')
+    'ruby193'
+  when @runtimes.include?('ruby19')
+    'ruby19'
+  else
+    @runtimes.first
+  end
+%>
 name: "rails3"
 runtimes:
 <% @runtimes.each do |runtime| -%>
   - "<%= runtime %>":
-      default: false
+      default: <%= runtime == default_runtime %>
 <%- end %>
 detection:
   - "config/application.rb": true
